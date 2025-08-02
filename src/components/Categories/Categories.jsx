@@ -27,7 +27,7 @@ export const Categories = () => {
         })()
     }, [numberOfCategoriesToShow,hotelcategory])
     const handleCategoryClick=(category)=>{
-        console.log("selected",category)
+    
         setHotelCategory(category)
        
     }
