@@ -1,9 +1,10 @@
 import { Fragment ,useEffect,useState} from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
-import { HotelCard, Navbar ,Categories} from "../../components/index"
+import { HotelCard, Navbar ,Categories, SearchStayWithDate} from "../../components/index"
 import "./Home.css"
 import axios from "axios"
 import { useCategory } from "../../context"
+import { useDate } from "../../context/DateContext"
 
 export const Home=()=>{
     const [testData,setTestData]=useState([])
@@ -11,6 +12,7 @@ export const Home=()=>{
     const [hasMore,setHasMore]=useState(true)
     const [currentIndex,setCurrentIndex]=useState(16)
     const {hotelcategory}=useCategory()
+    const {isSearchModelOpen}=useDate()
     useEffect(()=>{
         (async()=>{
             try{
@@ -25,7 +27,7 @@ export const Home=()=>{
             }
         })()
     },[hotelcategory])
-    
+
      
     const fetchMore=()=>{
         if(hotels.length>=testData.length){
@@ -45,7 +47,7 @@ export const Home=()=>{
         },1000)
 
     }
-
+   
     return(
         <Fragment>
             <Navbar />
@@ -63,6 +65,7 @@ export const Home=()=>{
            
            
             </InfiniteScroll>) : (<></>)}
+            {isSearchModelOpen && <SearchStayWithDate />}
              </Fragment>
             
             

@@ -1,5 +1,5 @@
 import { createContext,useContext,useState } from "react";
-const initialState="National Parks"
+const initialState=" "
 
 const CategoryContext=createContext()
 
