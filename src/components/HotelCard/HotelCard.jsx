@@ -35,7 +35,7 @@ export const HotelCard = ({hotel}) => {
 
             
                 <button className="button btn-wishlist absolute d-flex align-center cursor-pointer">
-                    <span class="material-icons-outlined">
+                    <span className="material-icons-outlined">
 favorite
 </span>
                 </button>

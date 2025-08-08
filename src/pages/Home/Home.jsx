@@ -1,10 +1,11 @@
 import { Fragment ,useEffect,useState} from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
-import { HotelCard, Navbar ,Categories, SearchStayWithDate} from "../../components/index"
+import { HotelCard, Navbar ,Categories, SearchStayWithDate, Filters} from "../../components/index"
 import "./Home.css"
 import axios from "axios"
-import { useCategory } from "../../context"
-import { useDate } from "../../context/DateContext"
+import { useCategory ,useFilter,useDate} from "../../context"
+import { getHotelsByPrice, getHotelsByPropertyType, getHotelsByRoomsAndBeds ,getHotelsByRating, getHotelsByFreeCancel} from "../../utils"
+
 
 export const Home=()=>{
     const [testData,setTestData]=useState([])
@@ -13,6 +14,7 @@ export const Home=()=>{
     const [currentIndex,setCurrentIndex]=useState(16)
     const {hotelcategory}=useCategory()
     const {isSearchModelOpen}=useDate()
+    const {isFilterOpen,priceRange,noOfBedrooms,noOfBeds,noOFBathrooms,propertytype,starRatings,isCancelable}=useFilter()
     useEffect(()=>{
         (async()=>{
             try{
@@ -48,6 +50,12 @@ export const Home=()=>{
 
     }
    
+    const filterHotelsByPrice=getHotelsByPrice(hotels,priceRange)
+    const filterHotelsByRoomsAndBeds=getHotelsByRoomsAndBeds(filterHotelsByPrice,noOfBedrooms,noOfBeds,noOFBathrooms)
+    const filterHotelsByPropertyType=getHotelsByPropertyType(filterHotelsByRoomsAndBeds,propertytype)
+    const filterHotelsByRating=getHotelsByRating(filterHotelsByPropertyType,starRatings)
+    const filterHotelsByFreeCancel=getHotelsByFreeCancel(filterHotelsByRating,isCancelable)
+
     return(
         <Fragment>
             <Navbar />
@@ -59,13 +67,14 @@ export const Home=()=>{
             loader={hotels.length>0 && <h3 className="alert-text">Loading...</h3>}
             endMessage={<p className="alert-text">You have seen it all</p>}>
                  <main className="main d-flex align-center wrap gap-larger">
-                {hotels &&  hotels.map((hotel)=><HotelCard key={hotel._id} hotel={hotel}/>)}
+                {filterHotelsByFreeCancel &&  filterHotelsByFreeCancel.map((hotel)=><HotelCard key={hotel._id} hotel={hotel}/>)}
                  
             </main>
            
            
             </InfiniteScroll>) : (<></>)}
             {isSearchModelOpen && <SearchStayWithDate />}
+            {isFilterOpen && <Filters />} 
              </Fragment>
             
             
