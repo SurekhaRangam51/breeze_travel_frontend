@@ -1,11 +1,12 @@
 import { Fragment, useEffect, useState } from "react"
 import axios from "axios"
 import "./Categories.css"
-import { useCategory } from "../../context"
+import { useCategory ,useFilter} from "../../context"
 export const Categories = () => {
     const [categories, setCategories] = useState([])
     const [numberOfCategoriesToShow, setnumberOfCategoriesToShow] = useState(0)
     const {hotelcategory,setHotelCategory}=useCategory()
+    const {isFilterOpen,filterDispatch}=useFilter()
       const handleShowLeft=()=>{
         setnumberOfCategoriesToShow(prev=>prev-10)
     }
@@ -31,10 +32,15 @@ export const Categories = () => {
         setHotelCategory(category)
        
     }
+    const handleFilterClick=()=>{
+        filterDispatch({
+            type:"FILTER_OPEN"
+        })
+    }
 
     return (
 
-        <section className="categories gap-larger d-flex align-center cursor-pointer ">
+        <section className="categories gap d-flex align-center cursor-pointer ">
             {numberOfCategoriesToShow>=10 &&  <button className="button btn-category btn-left" onClick={handleShowLeft}>  <span className="material-icons-outlined">
                 chevron_left
             </span></button>}
@@ -46,7 +52,14 @@ export const Categories = () => {
            {numberOfCategoriesToShow<categories.length &&  <button  className="button btn-category btn-right" onClick={handleShowRight}> <span className="material-icons-outlined">
                 chevron_right
             </span></button>}
-           
+           <div>
+                 <button className=" button btn-filter cursor d-flex align-center gap-small" onClick={handleFilterClick}>
+            <span className="material-icons-outlined">filter_alt</span>
+            <span>Filter</span>
+           </button>
+
+    
+          </div>
 
         </section>
 
