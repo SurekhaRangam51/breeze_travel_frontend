@@ -1,9 +1,9 @@
 import { Fragment ,useEffect,useState} from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
-import { HotelCard, Navbar ,Categories, SearchStayWithDate, Filters} from "../../components/index"
+import { HotelCard, Navbar ,Categories, SearchStayWithDate, Filters, AuthModal} from "../../components/index"
 import "./Home.css"
 import axios from "axios"
-import { useCategory ,useFilter,useDate} from "../../context"
+import { useCategory ,useFilter,useDate,useAuth} from "../../context"
 import { getHotelsByPrice, getHotelsByPropertyType, getHotelsByRoomsAndBeds ,getHotelsByRating, getHotelsByFreeCancel} from "../../utils"
 
 
@@ -15,6 +15,7 @@ export const Home=()=>{
     const {hotelcategory}=useCategory()
     const {isSearchModelOpen}=useDate()
     const {isFilterOpen,priceRange,noOfBedrooms,noOfBeds,noOFBathrooms,propertytype,starRatings,isCancelable}=useFilter()
+    const {isAuthModalOpen}=useAuth()
     useEffect(()=>{
         (async()=>{
             try{
@@ -56,6 +57,7 @@ export const Home=()=>{
     const filterHotelsByRating=getHotelsByRating(filterHotelsByPropertyType,starRatings)
     const filterHotelsByFreeCancel=getHotelsByFreeCancel(filterHotelsByRating,isCancelable)
 
+    
     return(
         <Fragment>
             <Navbar />
@@ -75,6 +77,7 @@ export const Home=()=>{
             </InfiniteScroll>) : (<></>)}
             {isSearchModelOpen && <SearchStayWithDate />}
             {isFilterOpen && <Filters />} 
+            {isAuthModalOpen && <AuthModal />} 
              </Fragment>
             
             
