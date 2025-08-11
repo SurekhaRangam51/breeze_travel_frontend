@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
-import { CategoryProvider,FilterProvider,DateProvider  } from './context/index.js'
+import { CategoryProvider,FilterProvider,DateProvider,AuthProvider } from './context/index.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -11,7 +11,10 @@ createRoot(document.getElementById('root')).render(
     <CategoryProvider>
       <DateProvider>
         <FilterProvider>
-               <App />
+          <AuthProvider>
+                 <App />
+          </AuthProvider>
+              
         </FilterProvider>
           
       </DateProvider>

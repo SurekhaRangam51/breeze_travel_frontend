@@ -1,18 +1,21 @@
 import { Link } from "react-router-dom"
 import "./Navbar.css"
-import { useDate } from "../../context/DateContext"
+import { useDate,useAuth } from "../../context"
 export const Navbar = () => {
     const { dateDispatch ,guest,destination,checkInDate,checkOutDate} = useDate()
+    const {authDispatch}=useAuth()
     const handleSearchClick = () => {
-
         dateDispatch({
             type: "OPEN_SEARCH_MODAL",
 
         })
+}
+const handleAuthClick=()=>{
+    authDispatch({
+        type:"OPEN_AUTH_MODAL"
+    })
 
-
-
-    }
+}
     return (
         <header className="heading d-flex  align-center">
 
@@ -37,7 +40,7 @@ export const Navbar = () => {
                     search
                 </span>
             </div>
-            <nav className="d-flex align-center gap-large">
+            <nav className="d-flex align-center gap-large" onClick={handleAuthClick}>
                 <div className=" nav d-flex align-center cursor-pointer">
                     <span className="material-icons-outlined profile-option menu">
                         menu
