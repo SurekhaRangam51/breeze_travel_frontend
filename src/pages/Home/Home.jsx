@@ -20,7 +20,7 @@ export const Home=()=>{
         (async()=>{
             try{
                 const {data}=await axios.get(`http://localhost:3700/api/hotelsdata?category=${hotelcategory}`)
-                console.log("hc",hotelcategory)
+                
                 console.log(data)
                 setTestData(data)
                 setHotels(data ? data.slice(0,16) : [])

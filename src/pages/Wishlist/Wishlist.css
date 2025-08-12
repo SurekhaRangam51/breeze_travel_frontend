@@ -1,0 +1,19 @@
+
+.wishlist-page {
+  padding: 1.5rem 3rem 2rem  2.5rem;
+}
+
+.heading-2 {
+  padding: 7rem 0 1rem;
+  font-size: 2.5rem;
+
+}
+
+.click-here {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.click-here:hover {
+  cursor: pointer;
+}
