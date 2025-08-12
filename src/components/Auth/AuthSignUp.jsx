@@ -70,14 +70,16 @@ export const AuthSignUp = () => {
         if (nameValid && numberValid && emailValid && passwordValid && confirmPasswordValid) {
         SignUpHandler(name, number, email, password, confirmPassword);
         authDispatch({ type: "CLEAR" });
-    
+        authDispatch({
+            type:"SET_TO_LOGIN"
+        })
              
         }
         
        
     }
    
-    console.log({ name, number, email, password, confirmPassword })
+    
     return (
         <div className="auth-container">
             <form onSubmit={handleSignUpSubmit}>

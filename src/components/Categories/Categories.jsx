@@ -57,9 +57,11 @@ export const Categories = () => {
             <span className="material-icons-outlined">filter_alt</span>
             <span>Filter</span>
            </button>
+           
 
     
           </div>
+         
 
         </section>
 
