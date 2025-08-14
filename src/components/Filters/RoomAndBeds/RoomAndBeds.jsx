@@ -20,7 +20,8 @@ export const RoomAndBeds=()=>{
                 payload:number
             })
     }
-    console.log(noOfBedrooms)
+   
+    
     return(
         <div className="filter-container">
             <span  className="filter-label">Rooms And Beds</span>
