@@ -1,9 +1,12 @@
 import "./FinalPrice.css"
 import { DateSelector } from "../DateSelector/DateSelector";
 import { useDate } from "../../context/DateContext";
+import { useNavigate } from "react-router-dom";
 export const FinalPrice=({singleHotel})=>{
-  const {guest,dateDispatch}=useDate()
+  const {guest,dateDispatch,checkInDate,checkOutDate}=useDate()
      const { _id, price, rating } = singleHotel; 
+     const navigate=useNavigate()
+    
      const handleGuestChange=(e)=>{
       dateDispatch({
         type:"GUEST",
@@ -11,6 +14,12 @@ export const FinalPrice=({singleHotel})=>{
 
       })
      }
+     const handleReserveClick=()=>{
+      navigate(`/confirm-payment/hotel/${_id}`)
+     }
+      const numberOfNights=
+        checkInDate && checkOutDate ?(checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 3600 * 24) : 0
+    const totalPayableAmount=price*numberOfNights+200
     return(
         <div className="price-details-container d-flex direction-column gap shadow">
       <div className="price-rating d-flex align-center justify-space-between">
@@ -46,23 +55,23 @@ export const FinalPrice=({singleHotel})=>{
         <div>
        <button
           className="button btn-reserve btn-primary cursor"
-          
+          onClick={handleReserveClick}
         >
           Reserve
         </button>
         </div>
       <div className="price-distribution d-flex direction-column">
         <div className="final-price d-flex align-center justify-space-between">
-          <span className="span">Rs. {price} x 2 nights</span>
-          <span className="span">Rd. {price * 2}</span>
+          <span className="span">Rs. {price} x {numberOfNights} nights</span>
+          <span className="span">Rs. {price * numberOfNights}</span>
         </div>
         <div className="final-price d-flex align-center justify-space-between">
           <span className="span">Service fee</span>
-          <span className="span">Rd. 200</span>
+          <span className="span">Rs. 200</span>
         </div>
         <div className="final-price d-flex align-center justify-space-between">
           <span className="span">Total</span>
-          <span className="span">Rs. {price * 2 + 200}</span>
+          <span className="span">Rs. { totalPayableAmount}</span>
         </div>
       </div>
       </div>

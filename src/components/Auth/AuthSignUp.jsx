@@ -16,8 +16,10 @@ export const AuthSignUp = () => {
     const handleNameChange = (e) => {
             authDispatch({
                 type: "NAME",
-                payload: e.target.value
+                payload: e.target.value,
+                
             })
+           
 }
 
     const handleNumberChange = (e) => {
