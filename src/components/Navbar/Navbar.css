@@ -65,4 +65,7 @@
 .cursor-pointer:hover {
   cursor: pointer;
 }
-
+.user-name{
+  font-size:0.875rem;
+  color:orangered
+}

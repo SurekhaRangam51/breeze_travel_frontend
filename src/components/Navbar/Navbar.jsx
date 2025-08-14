@@ -2,9 +2,10 @@ import { Link } from "react-router-dom"
 import "./Navbar.css"
 import { useDate, useAuth } from "../../context"
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 export const Navbar = () => {
     const { dateDispatch, guest, destination, checkInDate, checkOutDate } = useDate()
-    const { authDispatch,token } = useAuth()
+    const { authDispatch,token} = useAuth()
     const navigate=useNavigate()
     const handleSearchClick = () => {
         dateDispatch({
@@ -13,21 +14,21 @@ export const Navbar = () => {
         })
     }
     const handleAuthClick = () => {
-        authDispatch({
+        if(token){
+            authDispatch({
+                type:"AUTH_DROP_DOWN"
+            })
+        }
+        else{
+             authDispatch({
             type: "OPEN_AUTH_MODAL"
         })
+        }
+       
 
     }
-    const handleWishlist=()=>{
-        if(token){
-             navigate("/wishlist")
-    }
-    else{
-        authDispatch({
-            type:"OPEN_AUTH_MODAL"
-        })
-    }
-        }
+   
+   
        
     return (
         <header className="heading d-flex  align-center">
@@ -56,14 +57,7 @@ export const Navbar = () => {
 
 
             <nav className="d-flex align-center gap-large" >
-                <div className="d-flex align-center gap-large " onClick={handleWishlist}>
-                    <button className=" button btn-filter cursor d-flex align-center gap-small">
-                        <span className="material-icons-outlined fav-selected">
-                            favorite
-                        </span>
-                        <span>Wishlist</span>
-                    </button>
-                </div>
+                {token && <h5 className="user-name">Welcome To Breeze Trips</h5>}
                 <div className=" nav d-flex align-center cursor-pointer" onClick={handleAuthClick}>
                     <span className="material-icons-outlined profile-option menu">
                         menu

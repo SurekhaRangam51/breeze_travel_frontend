@@ -2,6 +2,7 @@ import { createContext,useContext, useReducer } from "react";
 import { AuthReducer } from "../Reducers";
 const initialState={
     isAuthModalOpen:false,
+    isAuthDropDownOpen:false,
     selectedTab:"login",
     name:"",
     number:"",
@@ -12,9 +13,9 @@ const initialState={
 }
 const Authcontext=createContext()
 const AuthProvider=({children})=>{
-    const [{isAuthModalOpen,selectedTab,name,number,email,password, confirmPassword,token},authDispatch]=useReducer(AuthReducer,initialState)
+    const [{isAuthModalOpen,selectedTab,name,number,email,password, confirmPassword,token,isAuthDropDownOpen},authDispatch]=useReducer(AuthReducer,initialState)
     return(
-         <Authcontext.Provider value={{isAuthModalOpen,selectedTab,name,number,email,password, confirmPassword,token,authDispatch}}>
+         <Authcontext.Provider value={{isAuthModalOpen,selectedTab,name,number,email,password, confirmPassword,token,isAuthDropDownOpen,authDispatch}}>
         {children}
     </Authcontext.Provider>
 

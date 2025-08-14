@@ -23,7 +23,8 @@ export const AuthReducer = (state, { type, payload }) => {
         case "NAME":
             return {
                 ...state,
-                name: payload
+                name: payload,
+                
             }
         case "EMAIL":
             return {
@@ -59,7 +60,21 @@ export const AuthReducer = (state, { type, payload }) => {
                 number: "",
                 email: "",
                 password: "",
-                confirmPassword: ""
+                confirmPassword: "",
+                
+            }
+        case "CLEAR_CREDENTIALS":
+            return{
+                ...state,
+                number:"",
+                password:"",
+                token:""
+            }
+        case "AUTH_DROP_DOWN":
+            return{
+                ...state,
+                isAuthDropDownOpen:!state.isAuthDropDownOpen,
+                
             }
         default:
             return state

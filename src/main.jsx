@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
-import { CategoryProvider,FilterProvider,DateProvider,AuthProvider ,WishlistProvider} from './context/index.js'
+import { CategoryProvider,FilterProvider,DateProvider,AuthProvider ,WishlistProvider,HotelProvider} from './context/index.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,7 +13,11 @@ createRoot(document.getElementById('root')).render(
         <FilterProvider>
           <AuthProvider>
             <WishlistProvider>
-                     <App />
+              <HotelProvider>
+                   <App />
+              </HotelProvider>
+            
+                    
             </WishlistProvider>
                 
           </AuthProvider>
